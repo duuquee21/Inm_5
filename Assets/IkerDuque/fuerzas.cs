@@ -6,10 +6,12 @@ using UnityEngine;
 public class fuerzas : MonoBehaviour
 {
     public int contadorMoneda;
-    public TMP_Text mensajeVictoria;
     public TMP_Text Contador;
+    public TMP_Text mensajeVictoria; // Texto para "YOU WIN"
     public float speed = 1f;
-    private int totalMonedas;
+
+    private int totalMonedas; // Número total de monedas en la escena
+    public Transform pelota; // Referencia a la pelota
     void Start()
     {
        
@@ -24,7 +26,7 @@ public class fuerzas : MonoBehaviour
     {
         if (contadorMoneda == totalMonedas)
         {
-            GanarJuego();
+            MostrarVictoria();
         }
     }
 
@@ -49,11 +51,14 @@ public class fuerzas : MonoBehaviour
         }
     }
 
-    private void GanarJuego()
+    private void MostrarVictoria()
     {
-        mensajeVictoria.text = "YOU WIN"; // Mostrar mensaje de victoria
-        mensajeVictoria.gameObject.SetActive(true); // Hacer visible el texto
-        Time.timeScale = 0; // Detener la escena
+        mensajeVictoria.gameObject.SetActive(true); 
+        mensajeVictoria.text = "YOU WIN";
+
+        // Hacer que el texto siga la posición de la pelota
+        Vector3 posicionTexto = pelota.position + Vector3.up * 1.5f; 
+        mensajeVictoria.transform.position = posicionTexto;
     }
 
 
